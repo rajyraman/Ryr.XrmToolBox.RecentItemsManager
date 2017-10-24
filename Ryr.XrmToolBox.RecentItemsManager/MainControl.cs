@@ -1,9 +1,7 @@
 ﻿using Ryr.XrmToolBox.RecentItemsManager.AppCode;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using Microsoft.Xrm.Sdk;
 using XrmToolBox.Extensibility;
@@ -11,7 +9,6 @@ using XrmToolBox.Extensibility.Interfaces;
 using ComboBox = System.Windows.Forms.ComboBox;
 using ListView = System.Windows.Forms.ListView;
 using ListViewItem = System.Windows.Forms.ListViewItem;
-using View = System.Web.UI.WebControls.View;
 
 namespace Ryr.XrmToolBox.RecentItemsManager
 {
@@ -94,51 +91,31 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             ExecuteMethod(LoadUsers);
         }
 
-        private void tsbUpdateUserSettings_Click(object sender, EventArgs e)
+        private void tsbRetrieveStats_Click(object sender, EventArgs e)
         {
-            if (userSelector1.SelectedItems.Count == 0)
-            {
-                MessageBox.Show(this, "No user has been selected!", "Warning", MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
             WorkAsync(new WorkAsyncInfo
             {
-                Message = "Initializing update...",
-                AsyncArgument = new Tuple<List<Entity>, Entity>(userSelector1.SelectedItems, null),
-                Work = (bw, evt) =>
+                Message = "Initializing...",
+                AsyncArgument = userSelector1.Items,
+                Work = (bw, o) =>
                 {
-                    var updateUserSettings = (Tuple<List<Entity>, Entity>)evt.Argument;
-
-                    foreach (var updateUserSetting in updateUserSettings.Item1)
-                    {
-                        bw.ReportProgress(0, "Updating settings for user " + updateUserSetting.GetAttributeValue<string>("fullname"));
-                    }
+                    var ush = new RecentItemsHelper(Service, ConnectionDetail);
+                    var u = (List<Entity>) o.Argument;
+                    o.Result = ush.RetrieveRecentItemsForUsers(u);
                 },
-                PostWorkCallBack = evt =>
+                PostWorkCallBack = o =>
                 {
-                    if (evt.Error != null)
-                    {
-                        MessageBox.Show(this, "An error occured: " + evt.Error.ToString(), "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                },
-                ProgressChanged = evt => { SetWorkingMessage(evt.UserState.ToString()); }
+                    var allRecentItems = new List<RecentlyViewedItem>();
+                    var recentItems = (List<KeyValuePair<EntityReference, List<RecentlyViewedItem>>>)o.Result;
+                    recentItems.ForEach(x => allRecentItems.AddRange(x.Value));
+                    new MRUStats(allRecentItems).Show();
+                }
             });
-        }
-
-        public void LoadCurrentUserSetting(Entity settings)
-        {
-        }
-
-        private void tsbReset_Click(object sender, EventArgs e)
-        {
         }
 
         public string RepositoryName => "Ryr.XrmToolBox.RecentItemsManager";
         public string UserName => "rajyraman";
-        public string HelpUrl => "https://github.com/MscrmTools/Ryr.XrmToolBox.RecentItemsManager/wiki";
+        public string HelpUrl => "https://github.com/rajyraman/Ryr.XrmToolBox.RecentItemsManager/";
 
         private void tsbEditInFXB_Click(object sender, EventArgs e)
         {
@@ -200,16 +177,10 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             if (recordList.SelectedItems.Count == 0) return;
 
             var selectedItem = (RecentlyViewedItem)recordList.SelectedItems[0].Tag;
-            if (selectedItem.DisplayName == "Dashboard")
-            {
-                System.Diagnostics.Process.Start(
-                    $"{ConnectionDetail.WebApplicationUrl}workplace/home_dashboards.aspx?dashboardId={selectedItem.ObjectId}&{selectedItem.Action}");
-            }
-            else
-            {
-                System.Diagnostics.Process.Start(
-                    $"{ConnectionDetail.WebApplicationUrl}main.aspx?etc={selectedItem.EntityTypeCode}&id={selectedItem.ObjectId}&newWindow=true&pagetype=entityrecord");
-            }
+            System.Diagnostics.Process.Start(
+                selectedItem.DisplayName == "Dashboard"
+                    ? $"{ConnectionDetail.WebApplicationUrl}workplace/home_dashboards.aspx?dashboardId={selectedItem.ObjectId}&{selectedItem.Action}"
+                    : $"{ConnectionDetail.WebApplicationUrl}main.aspx?etc={selectedItem.EntityTypeCode}&id={selectedItem.ObjectId}&newWindow=true&pagetype=entityrecord");
         }
 
         private void viewList_MouseDoubleClick(object sender, MouseEventArgs e)

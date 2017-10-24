@@ -8,8 +8,8 @@ namespace Ryr.XrmToolBox.RecentItemsManager.AppCode
 {
     public enum RecentlyViewedType
     {
-        Record = 0,
-        View = 1
+        Record,
+        View
     }
 
     public class RecentlyViewedItem

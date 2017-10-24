@@ -36,9 +36,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditInFXB = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbUpdateUserRecentItems = new System.Windows.Forms.ToolStripButton();
+            this.tsbRetrieveStats = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbReset = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -75,9 +74,8 @@
             this.toolStripSeparator2,
             this.tsbEditInFXB,
             this.toolStripSeparator3,
-            this.tsbUpdateUserRecentItems,
-            this.toolStripSeparator4,
-            this.tsbReset});
+            this.tsbRetrieveStats,
+            this.toolStripSeparator4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
@@ -129,29 +127,20 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 48);
             // 
-            // tsbUpdateUserRecentItems
+            // tsbRetrieveStats
             // 
-            this.tsbUpdateUserRecentItems.Image = ((System.Drawing.Image)(resources.GetObject("tsbUpdateUserRecentItems.Image")));
-            this.tsbUpdateUserRecentItems.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbUpdateUserRecentItems.Name = "tsbUpdateUserRecentItems";
-            this.tsbUpdateUserRecentItems.Size = new System.Drawing.Size(374, 45);
-            this.tsbUpdateUserRecentItems.Text = "Update User(s) Settings";
-            this.tsbUpdateUserRecentItems.ToolTipText = "Update User(s) Items";
-            this.tsbUpdateUserRecentItems.Click += new System.EventHandler(this.tsbUpdateUserSettings_Click);
+            this.tsbRetrieveStats.Image = ((System.Drawing.Image)(resources.GetObject("tsbRetrieveStats.Image")));
+            this.tsbRetrieveStats.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRetrieveStats.Name = "tsbRetrieveStats";
+            this.tsbRetrieveStats.Size = new System.Drawing.Size(337, 45);
+            this.tsbRetrieveStats.Text = "Retrieve Recent Stats";
+            this.tsbRetrieveStats.ToolTipText = "Update User(s) Items";
+            this.tsbRetrieveStats.Click += new System.EventHandler(this.tsbRetrieveStats_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 48);
-            // 
-            // tsbReset
-            // 
-            this.tsbReset.Image = ((System.Drawing.Image)(resources.GetObject("tsbReset.Image")));
-            this.tsbReset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbReset.Name = "tsbReset";
-            this.tsbReset.Size = new System.Drawing.Size(134, 45);
-            this.tsbReset.Text = "Reset";
-            this.tsbReset.Click += new System.EventHandler(this.tsbReset_Click);
             // 
             // splitContainer1
             // 
@@ -339,8 +328,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton tsbUpdateUserRecentItems;
-        private System.Windows.Forms.ToolStripButton tsbReset;
+        private System.Windows.Forms.ToolStripButton tsbRetrieveStats;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton tsbEditInFXB;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
