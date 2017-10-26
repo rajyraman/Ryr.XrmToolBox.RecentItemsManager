@@ -9,6 +9,7 @@ using XrmToolBox.Extensibility.Interfaces;
 using ComboBox = System.Windows.Forms.ComboBox;
 using ListView = System.Windows.Forms.ListView;
 using ListViewItem = System.Windows.Forms.ListViewItem;
+using View = System.Web.UI.WebControls.View;
 
 namespace Ryr.XrmToolBox.RecentItemsManager
 {
@@ -190,6 +191,41 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             var selectedItem = (RecentlyViewedItem)viewList.SelectedItems[0].Tag;
             System.Diagnostics.Process.Start(
                 $"{ConnectionDetail.WebApplicationUrl}_root/homepage.aspx?etc={selectedItem.EntityTypeCode}&pagemode=iframe&viewid={selectedItem.ObjectId}&{selectedItem.Action}");
+
+        }
+
+        private void recordContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            PopulatePinListView(recordList, recordsPinList);
+        }
+        private void viewContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            PopulatePinListView(viewList, viewPinList);
+        }
+
+        private void PopulatePinListView(ListView sourceList, ListView targetList)
+        {
+            if (sourceList.SelectedItems.Count == 0) return;
+
+            foreach (ListViewItem record in sourceList.SelectedItems)
+            {
+                var listItem = new ListViewItem {Text = record.Text, Tag = record.Tag};
+                listItem.SubItems.Add(record.SubItems[1]);
+                targetList.Items.Add(listItem);
+            }
+            targetList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void tsbReset_Click(object sender, EventArgs e)
+        {
+            if(viewPinList.Items.Count > 0) viewPinList.Items.Clear();
+            if (recordsPinList.Items.Count > 0) recordsPinList.Items.Clear();
+            if (recordList.Items.Count > 0) recordList.Items.Clear();
+            if (viewList.Items.Count > 0) viewList.Items.Clear();
+        }
+
+        private void tsbPin_Click(object sender, EventArgs e)
+        {
 
         }
     }

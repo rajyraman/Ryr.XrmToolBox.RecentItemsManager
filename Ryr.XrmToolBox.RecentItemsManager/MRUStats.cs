@@ -49,7 +49,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 row.SubItems.Add(item.LastAccessed.ToString());
                 recentItems.Items.Add(row);
             }
-            recentItems.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            recentItems.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         private void PopulateRecentViewList()
         {
@@ -76,7 +76,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 row.SubItems.Add(item.NotPinnedCount.ToString());
                 recentViews.Items.Add(row);
             }
-            recentViews.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            recentViews.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         private void PopulateRecentDashboardList()
         {
@@ -105,7 +105,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 row.SubItems.Add(item.NotPinnedCount.ToString());
                 recentDashboards.Items.Add(row);
             }
-            recentDashboards.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            recentDashboards.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
     }
 }

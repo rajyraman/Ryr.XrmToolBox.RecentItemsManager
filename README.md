@@ -2,5 +2,6 @@
 XrmToolBox plugin to view and manager user's recent items and pin them if required.
 
 ![Screenshot](Screenshot.png)
+![Stats](Stats.png)
 
 WORK IN PROGRESS (23-OCT-2017)

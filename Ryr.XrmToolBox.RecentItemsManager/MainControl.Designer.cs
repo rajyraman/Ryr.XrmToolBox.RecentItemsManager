@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainControl));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
@@ -40,19 +41,40 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.recordsPinList = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewPinList = new System.Windows.Forms.ListView();
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.recordList = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.viewList = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewPinSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.recordList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.recordContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.recordPinSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbReset = new System.Windows.Forms.ToolStripButton();
+            this.tsbPin = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -60,9 +82,16 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.viewContextMenu.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.recordContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -71,11 +100,16 @@
             this.tsbClose,
             this.toolStripSeparator1,
             this.tsbLoadUsers,
+            this.toolStripSeparator5,
             this.toolStripSeparator2,
             this.tsbEditInFXB,
             this.toolStripSeparator3,
             this.tsbRetrieveStats,
-            this.toolStripSeparator4});
+            this.toolStripSeparator4,
+            this.tsbPin,
+            this.toolStripSeparator7,
+            this.tsbReset,
+            this.toolStripSeparator6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
@@ -134,7 +168,7 @@
             this.tsbRetrieveStats.Name = "tsbRetrieveStats";
             this.tsbRetrieveStats.Size = new System.Drawing.Size(337, 45);
             this.tsbRetrieveStats.Text = "Retrieve Recent Stats";
-            this.tsbRetrieveStats.ToolTipText = "Update User(s) Items";
+            this.tsbRetrieveStats.ToolTipText = "Show interesting stats from MRU list";
             this.tsbRetrieveStats.Click += new System.EventHandler(this.tsbRetrieveStats_Click);
             // 
             // toolStripSeparator4
@@ -164,7 +198,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Controls.Add(this.splitContainer2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -173,21 +207,196 @@
             this.panel1.Size = new System.Drawing.Size(1718, 1862);
             this.panel1.TabIndex = 0;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.tableLayoutPanel2);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainer2.Size = new System.Drawing.Size(1718, 1862);
+            this.splitContainer2.SplitterDistance = 150;
+            this.splitContainer2.TabIndex = 1;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.recordsPinList, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.viewPinList, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1718, 150);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // recordsPinList
+            // 
+            this.recordsPinList.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.recordsPinList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
+            this.columnHeader10});
+            this.recordsPinList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recordsPinList.FullRowSelect = true;
+            this.recordsPinList.GridLines = true;
+            this.recordsPinList.HideSelection = false;
+            this.recordsPinList.Location = new System.Drawing.Point(3, 35);
+            this.recordsPinList.Name = "recordsPinList";
+            this.recordsPinList.Size = new System.Drawing.Size(853, 112);
+            this.recordsPinList.TabIndex = 0;
+            this.recordsPinList.UseCompatibleStateImageBehavior = false;
+            this.recordsPinList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Entity";
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Name";
+            // 
+            // viewPinList
+            // 
+            this.viewPinList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader11,
+            this.columnHeader12});
+            this.viewPinList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPinList.GridLines = true;
+            this.viewPinList.HideSelection = false;
+            this.viewPinList.Location = new System.Drawing.Point(862, 35);
+            this.viewPinList.Name = "viewPinList";
+            this.viewPinList.Size = new System.Drawing.Size(853, 112);
+            this.viewPinList.TabIndex = 1;
+            this.viewPinList.UseCompatibleStateImageBehavior = false;
+            this.viewPinList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Entity";
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(853, 32);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Records to Pin";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(862, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(853, 32);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Views to Pin";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1718, 1862);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1718, 1708);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.viewList);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(862, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(853, 1702);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Views";
+            // 
+            // viewList
+            // 
+            this.viewList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8});
+            this.viewList.ContextMenuStrip = this.viewContextMenu;
+            this.viewList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewList.FullRowSelect = true;
+            this.viewList.GridLines = true;
+            this.viewList.HideSelection = false;
+            this.viewList.Location = new System.Drawing.Point(3, 34);
+            this.viewList.Name = "viewList";
+            this.viewList.Size = new System.Drawing.Size(847, 1665);
+            this.viewList.TabIndex = 0;
+            this.viewList.UseCompatibleStateImageBehavior = false;
+            this.viewList.View = System.Windows.Forms.View.Details;
+            this.viewList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.viewList_ColumnClick);
+            this.viewList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.viewList_MouseDoubleClick);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Entity";
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Name";
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Last Accessed";
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Pinned";
+            // 
+            // viewContextMenu
+            // 
+            this.viewContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.viewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewPinSelect,
+            this.viewPinUnselect});
+            this.viewContextMenu.Name = "viewContextMenu";
+            this.viewContextMenu.Size = new System.Drawing.Size(355, 96);
+            this.viewContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.viewContextMenu_ItemClicked);
+            // 
+            // viewPinSelect
+            // 
+            this.viewPinSelect.Name = "viewPinSelect";
+            this.viewPinSelect.Size = new System.Drawing.Size(354, 46);
+            this.viewPinSelect.Text = "Select to be pinned";
+            // 
+            // viewPinUnselect
+            // 
+            this.viewPinUnselect.Name = "viewPinUnselect";
+            this.viewPinUnselect.Size = new System.Drawing.Size(354, 46);
+            this.viewPinUnselect.Text = "Remove Pin";
             // 
             // groupBox1
             // 
@@ -195,7 +404,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(853, 1856);
+            this.groupBox1.Size = new System.Drawing.Size(853, 1702);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Records";
@@ -207,13 +416,14 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.recordList.ContextMenuStrip = this.recordContextMenu;
             this.recordList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recordList.FullRowSelect = true;
             this.recordList.GridLines = true;
             this.recordList.HideSelection = false;
             this.recordList.Location = new System.Drawing.Point(3, 34);
             this.recordList.Name = "recordList";
-            this.recordList.Size = new System.Drawing.Size(847, 1819);
+            this.recordList.Size = new System.Drawing.Size(847, 1665);
             this.recordList.TabIndex = 0;
             this.recordList.UseCompatibleStateImageBehavior = false;
             this.recordList.View = System.Windows.Forms.View.Details;
@@ -237,52 +447,61 @@
             // 
             this.columnHeader4.Text = "Pinned";
             // 
-            // groupBox2
+            // recordContextMenu
             // 
-            this.groupBox2.Controls.Add(this.viewList);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(862, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(853, 1856);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Views";
+            this.recordContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.recordContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recordPinSelect,
+            this.recordPinUnselect});
+            this.recordContextMenu.Name = "recordContextMenu";
+            this.recordContextMenu.Size = new System.Drawing.Size(355, 96);
+            this.recordContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.recordContextMenu_ItemClicked);
             // 
-            // viewList
+            // recordPinSelect
             // 
-            this.viewList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
-            this.viewList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewList.FullRowSelect = true;
-            this.viewList.GridLines = true;
-            this.viewList.HideSelection = false;
-            this.viewList.Location = new System.Drawing.Point(3, 34);
-            this.viewList.Name = "viewList";
-            this.viewList.Size = new System.Drawing.Size(847, 1819);
-            this.viewList.TabIndex = 0;
-            this.viewList.UseCompatibleStateImageBehavior = false;
-            this.viewList.View = System.Windows.Forms.View.Details;
-            this.viewList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.viewList_ColumnClick);
-            this.viewList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.viewList_MouseDoubleClick);
+            this.recordPinSelect.Name = "recordPinSelect";
+            this.recordPinSelect.Size = new System.Drawing.Size(354, 46);
+            this.recordPinSelect.Text = "Select to be pinned";
             // 
-            // columnHeader5
+            // recordPinUnselect
             // 
-            this.columnHeader5.Text = "Entity";
+            this.recordPinUnselect.Name = "recordPinUnselect";
+            this.recordPinUnselect.Size = new System.Drawing.Size(354, 46);
+            this.recordPinUnselect.Text = "Remove Pin";
             // 
-            // columnHeader6
+            // tsbReset
             // 
-            this.columnHeader6.Text = "Name";
+            this.tsbReset.Image = ((System.Drawing.Image)(resources.GetObject("tsbReset.Image")));
+            this.tsbReset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbReset.Name = "tsbReset";
+            this.tsbReset.Size = new System.Drawing.Size(134, 45);
+            this.tsbReset.Text = "Reset";
+            this.tsbReset.ToolTipText = "Reset Pinned items list";
+            this.tsbReset.Click += new System.EventHandler(this.tsbReset_Click);
             // 
-            // columnHeader7
+            // tsbPin
             // 
-            this.columnHeader7.Text = "Last Accessed";
+            this.tsbPin.Image = ((System.Drawing.Image)(resources.GetObject("tsbPin.Image")));
+            this.tsbPin.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPin.Name = "tsbPin";
+            this.tsbPin.Size = new System.Drawing.Size(343, 45);
+            this.tsbPin.Text = "Pin for selected users";
+            this.tsbPin.Click += new System.EventHandler(this.tsbPin_Click);
             // 
-            // columnHeader8
+            // toolStripSeparator5
             // 
-            this.columnHeader8.Text = "Pinned";
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 48);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 48);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 48);
             // 
             // userSelector1
             // 
@@ -310,9 +529,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.viewContextMenu.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.recordContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,5 +572,26 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ListView recordsPinList;
+        private System.Windows.Forms.ListView viewPinList;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ContextMenuStrip recordContextMenu;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ToolStripMenuItem recordPinSelect;
+        private System.Windows.Forms.ToolStripMenuItem recordPinUnselect;
+        private System.Windows.Forms.ContextMenuStrip viewContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem viewPinSelect;
+        private System.Windows.Forms.ToolStripMenuItem viewPinUnselect;
+        private System.Windows.Forms.ToolStripButton tsbReset;
+        private System.Windows.Forms.ToolStripButton tsbPin;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
