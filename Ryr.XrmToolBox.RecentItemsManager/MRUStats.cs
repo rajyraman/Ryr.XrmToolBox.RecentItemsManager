@@ -41,7 +41,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                     Count = g.Count(),
                     LastAccessed = g.Max(x => x.LastAccessed)
                 }
-            ).Take(20);
+            );
             foreach (var item in items)
             {
                 var row = new ListViewItem {Text = item.Key};
@@ -66,7 +66,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                         LastAccessed = g.Max(x => x.LastAccessed),
                         PinnedCount = g.Count(x => x.PinStatus == "Yes"),
                         NotPinnedCount = g.Count(x => x.PinStatus == "No") }
-                ).Take(20);
+                );
             foreach (var item in items)
             {
                 var row = new ListViewItem { Text = item.Key.Title };
@@ -95,7 +95,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                     PinnedCount = g.Count(x => x.PinStatus == "Yes"),
                     NotPinnedCount = g.Count(x => x.PinStatus == "No")
                 }
-            ).Take(20);
+            );
             foreach (var item in items)
             {
                 var row = new ListViewItem { Text = item.Key.Title };

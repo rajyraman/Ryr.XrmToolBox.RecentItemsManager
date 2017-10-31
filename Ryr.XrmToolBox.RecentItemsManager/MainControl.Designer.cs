@@ -34,21 +34,29 @@
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbLoadUsers = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditInFXB = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbRetrieveStats = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbPin = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbReset = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.recordsPinList = new System.Windows.Forms.ListView();
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.viewPinList = new System.Windows.Forms.ListView();
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -70,12 +78,6 @@
             this.recordContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.recordPinSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.recordPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbReset = new System.Windows.Forms.ToolStripButton();
-            this.tsbPin = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -142,6 +144,11 @@
             this.tsbLoadUsers.ToolTipText = "Load Users";
             this.tsbLoadUsers.Click += new System.EventHandler(this.tsbLoadCrmItems_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 48);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -176,6 +183,35 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 48);
             // 
+            // tsbPin
+            // 
+            this.tsbPin.Image = ((System.Drawing.Image)(resources.GetObject("tsbPin.Image")));
+            this.tsbPin.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPin.Name = "tsbPin";
+            this.tsbPin.Size = new System.Drawing.Size(435, 45);
+            this.tsbPin.Text = "Pin/Unpin for selected users";
+            this.tsbPin.Click += new System.EventHandler(this.tsbPin_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 48);
+            // 
+            // tsbReset
+            // 
+            this.tsbReset.Image = ((System.Drawing.Image)(resources.GetObject("tsbReset.Image")));
+            this.tsbReset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbReset.Name = "tsbReset";
+            this.tsbReset.Size = new System.Drawing.Size(134, 45);
+            this.tsbReset.Text = "Reset";
+            this.tsbReset.ToolTipText = "Reset Pinned items list";
+            this.tsbReset.Click += new System.EventHandler(this.tsbReset_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 48);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -194,6 +230,16 @@
             this.splitContainer1.SplitterDistance = 650;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // userSelector1
+            // 
+            this.userSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userSelector1.Location = new System.Drawing.Point(0, 0);
+            this.userSelector1.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
+            this.userSelector1.Name = "userSelector1";
+            this.userSelector1.Service = null;
+            this.userSelector1.Size = new System.Drawing.Size(650, 1862);
+            this.userSelector1.TabIndex = 1;
             // 
             // panel1
             // 
@@ -249,7 +295,8 @@
             this.recordsPinList.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.recordsPinList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader9,
-            this.columnHeader10});
+            this.columnHeader10,
+            this.columnHeader13});
             this.recordsPinList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recordsPinList.FullRowSelect = true;
             this.recordsPinList.GridLines = true;
@@ -269,11 +316,16 @@
             // 
             this.columnHeader10.Text = "Name";
             // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Pinned";
+            // 
             // viewPinList
             // 
             this.viewPinList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader11,
-            this.columnHeader12});
+            this.columnHeader12,
+            this.columnHeader14});
             this.viewPinList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.viewPinList.GridLines = true;
             this.viewPinList.HideSelection = false;
@@ -291,6 +343,10 @@
             // columnHeader12
             // 
             this.columnHeader12.Text = "Name";
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Pinned";
             // 
             // label1
             // 
@@ -469,50 +525,6 @@
             this.recordPinUnselect.Size = new System.Drawing.Size(354, 46);
             this.recordPinUnselect.Text = "Remove Pin";
             // 
-            // tsbReset
-            // 
-            this.tsbReset.Image = ((System.Drawing.Image)(resources.GetObject("tsbReset.Image")));
-            this.tsbReset.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbReset.Name = "tsbReset";
-            this.tsbReset.Size = new System.Drawing.Size(134, 45);
-            this.tsbReset.Text = "Reset";
-            this.tsbReset.ToolTipText = "Reset Pinned items list";
-            this.tsbReset.Click += new System.EventHandler(this.tsbReset_Click);
-            // 
-            // tsbPin
-            // 
-            this.tsbPin.Image = ((System.Drawing.Image)(resources.GetObject("tsbPin.Image")));
-            this.tsbPin.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPin.Name = "tsbPin";
-            this.tsbPin.Size = new System.Drawing.Size(343, 45);
-            this.tsbPin.Text = "Pin for selected users";
-            this.tsbPin.Click += new System.EventHandler(this.tsbPin_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 48);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 48);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 48);
-            // 
-            // userSelector1
-            // 
-            this.userSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userSelector1.Location = new System.Drawing.Point(0, 0);
-            this.userSelector1.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
-            this.userSelector1.Name = "userSelector1";
-            this.userSelector1.Service = null;
-            this.userSelector1.Size = new System.Drawing.Size(650, 1862);
-            this.userSelector1.TabIndex = 1;
-            // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -593,5 +605,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
     }
 }

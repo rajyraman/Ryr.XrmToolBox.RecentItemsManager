@@ -18,6 +18,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
         private const string ACTIVE_USERS_FETCH = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' ><entity name='systemuser' ><attribute name='fullname' /><order attribute='fullname' descending='false' /><attribute name='businessunitid' /><attribute name='siteid' /><filter type='and' ><condition attribute='isdisabled' operator='eq' value='0' /><condition attribute='accessmode' operator='ne' value='3' /></filter><attribute name='systemuserid' /></entity></fetch>";
         private int recentRecordsColumnOrder;
         private int recentViewsColumnOrder;
+        private RecentItemsHelper _recentItemsHelper;
         public MainControl()
         {
             InitializeComponent();
@@ -27,11 +28,12 @@ namespace Ryr.XrmToolBox.RecentItemsManager
         {
             userSelector1.Service = Service;
             userSelector1.LoadViews();
+            _recentItemsHelper = new RecentItemsHelper(Service, ConnectionDetail);
+            ClearPinLists();
         }
 
         public void LoadSettings()
         {
-            var ush = new RecentItemsHelper(Service, ConnectionDetail);
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Initializing...",
@@ -39,7 +41,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 Work = (bw, e) =>
                 {
                     var u = (List<Entity>) e.Argument;
-                    e.Result = ush.RetrieveRecentItemsForUsers(u);
+                    e.Result = _recentItemsHelper.RetrieveRecentItemsForUsers(u);
                 },
                 PostWorkCallBack = e =>
                 {
@@ -209,8 +211,15 @@ namespace Ryr.XrmToolBox.RecentItemsManager
 
             foreach (ListViewItem record in sourceList.SelectedItems)
             {
-                var listItem = new ListViewItem {Text = record.Text, Tag = record.Tag};
+                var pinItem = (RecentlyViewedItem) record.Tag;
+                pinItem.PinStatus = pinItem.PinStatus == "Yes" ? "No" : "Yes";
+                var listItem = new ListViewItem
+                {
+                    Text = record.Text,
+                    Tag = pinItem
+                };
                 listItem.SubItems.Add(record.SubItems[1]);
+                listItem.SubItems.Add(pinItem.PinStatus);
                 targetList.Items.Add(listItem);
             }
             targetList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -224,9 +233,44 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             if (viewList.Items.Count > 0) viewList.Items.Clear();
         }
 
-        private void tsbPin_Click(object sender, EventArgs e)
+        private void tsbPin_Click(object sender, EventArgs ev)
         {
+            WorkAsync(new WorkAsyncInfo
+            {
+                Message = "Initializing...",
+                AsyncArgument = userSelector1.SelectedItems,
+                Work = (bw, e) =>
+                {
+                    var u = (List<Entity>)e.Argument;
+                    _recentItemsHelper.Pin(u, ListViewDelegates.GetItems(viewPinList));
+                    _recentItemsHelper.Pin(u, ListViewDelegates.GetItems(recordsPinList));
+                    ListViewDelegates.ClearColumns(recordsPinList);
+                    e.Result = "Completed";
+                },
+                PostWorkCallBack = e =>
+                {
+                    MessageBox.Show("Pin Status updated");
+                    if (e.Error != null)
+                    {
+                        MessageBox.Show(this, "An error occured: " + e.Error.Message, "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        panel1.Enabled = true;
+                    }
+                },
+                ProgressChanged = e => { SetWorkingMessage(e.UserState.ToString()); }
+            });
 
+        }
+
+        private void ClearPinLists()
+        {
+            viewList.Items.Clear();
+            viewPinList.Items.Clear();
+            recordList.Items.Clear();
+            recordsPinList.Items.Clear();
         }
     }
 }

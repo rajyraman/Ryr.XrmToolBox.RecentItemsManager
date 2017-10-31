@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
@@ -14,6 +16,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
     {
         private IOrganizationService service;
         private ConnectionDetail detail;
+        private List<Entity> _recentlyViewedRecords;
 
         public RecentItemsHelper(IOrganizationService service, ConnectionDetail detail)
         {
@@ -30,7 +33,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 try
                 {
                     detail.ServiceClient.OrganizationServiceProxy.CallerId = user.Id;
-                    var records = detail.ServiceClient.OrganizationServiceProxy.RetrieveMultiple(
+                    _recentlyViewedRecords = detail.ServiceClient.OrganizationServiceProxy.RetrieveMultiple(
                         new FetchExpression($@"
                             <fetch distinct='false' no-lock='false' mapping='logical'>
                               <entity name='userentityuisettings'>
@@ -41,7 +44,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                                 </filter>
                               </entity>
                             </fetch>")).Entities.ToList();
-                    var userRecentlyViewedItems = records.Select(x =>
+                    var userRecentlyViewedItems = _recentlyViewedRecords.Select(x =>
                     {
                         if (string.IsNullOrEmpty(x.GetAttributeValue<string>("recentlyviewedxml")))
                             return new KeyValuePair<EntityReference, List<RecentlyViewedItem>>(
@@ -54,7 +57,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                             new RecentlyViewedItem
                             {
                                 Type = (RecentlyViewedType)int.Parse(r.Element("Type").Value),
-                                ObjectId = Guid.TryParse(r.Element("ObjectId")?.Value, out Guid o) ? o : (Guid?)null,
+                                ObjectId = Guid.Parse(r.Element("ObjectId").Value),
                                 EntityTypeCode = int.Parse(r.Element("EntityTypeCode").Value),
                                 DisplayName = r.Element("DisplayName").Value == "System Form" ? "Dashboard" : r.Element("DisplayName").Value,
                                 Title = r.Element("Title").Value,
@@ -83,6 +86,94 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             }
             detail.ServiceClient.OrganizationServiceProxy.CallerId = currentUserId;
             return result;
+        }
+
+        public void Pin(List<Entity> users, ListViewItem[] recordPin)
+        {
+            var groupedPinItems = recordPin.Select(x => (RecentlyViewedItem)x.Tag)
+                                    .GroupBy(x=>x.EntityTypeCode)
+                                    .ToList();
+            var pinElements = recordPin.Select(x =>
+            {
+                var item = (RecentlyViewedItem) x.Tag;
+                var pinStatus = item.PinStatus == "Yes" ? "true" : "false";
+                var entityName = item.DisplayName == "Dashboard" ? "System Form" : item.DisplayName;
+                var xml = $@"<RecentlyViewedItem><Type>{(int)item.Type}</Type><ObjectId>{item.ObjectId:B}</ObjectId><EntityTypeCode>{item.EntityTypeCode}</EntityTypeCode><DisplayName>{entityName}</DisplayName><Title>{item.Title}</Title><Action>{HttpUtility.HtmlEncode(item.Action)}</Action><IconPath>{item.IconPath}</IconPath><PinStatus>{pinStatus}</PinStatus><ProcessInstanceId>{item.ProcessInstanceId}</ProcessInstanceId><ProcessId>{item.ProcessId}</ProcessId><LastAccessed>{DateTime.UtcNow.ToString("M/d/yyyy HH:mm:ss")}</LastAccessed></RecentlyViewedItem>";
+                return new
+                {
+                    RecentItem = item,
+                    RecentItemXml = xml
+                };
+            })
+            .GroupBy(x=>x.RecentItem.EntityTypeCode)
+            .ToList();
+            var currentUserId = detail.ServiceClient.OrganizationServiceProxy.CallerId;
+            var recentlyViewedXml = _recentlyViewedRecords.Select(x =>
+            {
+                var xml = x.GetAttributeValue<string>("recentlyviewedxml") ??
+                                      "<RecentlyViewedEntityData etc=''></RecentlyViewedEntityData>";
+                return new
+                {
+                    x.Id,
+                    OwnerId = x.GetAttributeValue<EntityReference>("ownerid").Id,
+                    RecentlyViewedXml = xml,
+                    RecentlyViewedXmlElements = XElement.Parse(xml).Elements()
+                };
+            }).ToList();
+            foreach (var user in users)
+            {
+                detail.ServiceClient.OrganizationServiceProxy.CallerId = user.Id;
+                var recentXmlForUser = recentlyViewedXml.Where(x => x.OwnerId == user.Id);
+                foreach (var groupedPinItem in groupedPinItems)
+                {
+                    foreach (var pinItem in groupedPinItem)
+                    {
+                        var pinStatus = pinItem.PinStatus == "Yes" ? "true" : "false";
+                        var matchedXml = recentXmlForUser.FirstOrDefault(x =>
+                            x.RecentlyViewedXmlElements.Any(y => y.Element("ObjectId").Value.Equals(pinItem.ObjectId.ToString("B"),
+                            StringComparison.CurrentCultureIgnoreCase)));
+                        var pin = new Entity("userentityuisettings")
+                        {
+                            ["ownerid"] = user.ToEntityReference()
+                        };
+                        if (matchedXml != null)
+                        {
+                            var f = matchedXml.RecentlyViewedXmlElements.First(x =>
+                                x.Element("ObjectId").Value.Equals(pinItem.ObjectId.ToString("B"),
+                                StringComparison.CurrentCultureIgnoreCase));
+                            f.Element("PinStatus").Value = pinStatus;
+                            pin["recentlyviewedxml"] = $@"<RecentlyViewedEntityData etc=""{pinItem.EntityTypeCode}"">{string.Join("", matchedXml.RecentlyViewedXmlElements)}</RecentlyViewedEntityData>";
+                            pin.Id = matchedXml.Id;
+                            detail.ServiceClient.OrganizationServiceProxy.Update(pin);
+                        }
+                        else
+                        {
+                            matchedXml = recentXmlForUser.FirstOrDefault(x =>
+                                XElement.Parse(x.RecentlyViewedXml).Attribute("etc").Value.Equals(pinItem.EntityTypeCode.ToString(),
+                                    StringComparison.CurrentCultureIgnoreCase));
+                            var newPinXml = string.Join("",
+                                pinElements.Where(x => x.Key == groupedPinItem.Key)
+                                    .Select(x => string.Join("", x.Select(y => y.RecentItemXml))));
+                            if (matchedXml == null)
+                            {
+                                var itemToPin = new Entity("userentityuisettings")
+                                {
+                                    ["ownerid"] = user.ToEntityReference(),
+                                    ["recentlyviewedxml"] = $@"<RecentlyViewedEntityData etc=""{groupedPinItem.Key}"">{newPinXml}</RecentlyViewedEntityData>"
+                                };
+                                detail.ServiceClient.OrganizationServiceProxy.Create(itemToPin);
+                            }
+                            else
+                            {
+                                pin["recentlyviewedxml"] = $@"<RecentlyViewedEntityData etc=""{pinItem.EntityTypeCode}"">{newPinXml}{string.Join("", matchedXml.RecentlyViewedXmlElements)}</RecentlyViewedEntityData>";
+                                pin.Id = matchedXml.Id;
+                                detail.ServiceClient.OrganizationServiceProxy.Update(pin);
+                            }
+                        }
+                    }
+                }
+                detail.ServiceClient.OrganizationServiceProxy.CallerId = currentUserId;
+            }
         }
     }
 }
