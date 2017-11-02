@@ -81,7 +81,6 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 row.SubItems.Add(r.PinStatus);
                 control.Items.Add(row);
             }
-            control.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void TsbCloseClick(object sender, EventArgs e)
@@ -229,8 +228,6 @@ namespace Ryr.XrmToolBox.RecentItemsManager
         {
             if(viewPinList.Items.Count > 0) viewPinList.Items.Clear();
             if (recordsPinList.Items.Count > 0) recordsPinList.Items.Clear();
-            if (recordList.Items.Count > 0) recordList.Items.Clear();
-            if (viewList.Items.Count > 0) viewList.Items.Clear();
         }
 
         private void tsbPin_Click(object sender, EventArgs ev)
@@ -245,11 +242,12 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                     _recentItemsHelper.Pin(u, ListViewDelegates.GetItems(viewPinList));
                     _recentItemsHelper.Pin(u, ListViewDelegates.GetItems(recordsPinList));
                     ListViewDelegates.ClearColumns(recordsPinList);
+                    ListViewDelegates.ClearColumns(viewPinList);
                     e.Result = "Completed";
                 },
                 PostWorkCallBack = e =>
                 {
-                    MessageBox.Show("Pin Status updated");
+                    MessageBox.Show("Pin Status updated", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (e.Error != null)
                     {
                         MessageBox.Show(this, "An error occured: " + e.Error.Message, "Error", MessageBoxButtons.OK,
@@ -258,6 +256,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                     else
                     {
                         panel1.Enabled = true;
+                        LoadSettings();
                     }
                 },
                 ProgressChanged = e => { SetWorkingMessage(e.UserState.ToString()); }

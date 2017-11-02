@@ -45,7 +45,6 @@
             this.tsbReset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -78,6 +77,7 @@
             this.recordContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.recordPinSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.recordPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
+            this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -125,7 +125,7 @@
             this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(44, 45);
+            this.tsbClose.Size = new System.Drawing.Size(23, 45);
             this.tsbClose.Text = "Close this tool";
             this.tsbClose.Click += new System.EventHandler(this.TsbCloseClick);
             // 
@@ -139,7 +139,7 @@
             this.tsbLoadUsers.Image = ((System.Drawing.Image)(resources.GetObject("tsbLoadUsers.Image")));
             this.tsbLoadUsers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLoadUsers.Name = "tsbLoadUsers";
-            this.tsbLoadUsers.Size = new System.Drawing.Size(208, 45);
+            this.tsbLoadUsers.Size = new System.Drawing.Size(184, 45);
             this.tsbLoadUsers.Text = "Load Users";
             this.tsbLoadUsers.ToolTipText = "Load Users";
             this.tsbLoadUsers.Click += new System.EventHandler(this.tsbLoadCrmItems_Click);
@@ -159,7 +159,7 @@
             this.tsbEditInFXB.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditInFXB.Image")));
             this.tsbEditInFXB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditInFXB.Name = "tsbEditInFXB";
-            this.tsbEditInFXB.Size = new System.Drawing.Size(369, 45);
+            this.tsbEditInFXB.Size = new System.Drawing.Size(345, 45);
             this.tsbEditInFXB.Text = "Choose users from FXB";
             this.tsbEditInFXB.Click += new System.EventHandler(this.tsbEditInFXB_Click);
             // 
@@ -173,7 +173,7 @@
             this.tsbRetrieveStats.Image = ((System.Drawing.Image)(resources.GetObject("tsbRetrieveStats.Image")));
             this.tsbRetrieveStats.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRetrieveStats.Name = "tsbRetrieveStats";
-            this.tsbRetrieveStats.Size = new System.Drawing.Size(337, 45);
+            this.tsbRetrieveStats.Size = new System.Drawing.Size(313, 45);
             this.tsbRetrieveStats.Text = "Retrieve Recent Stats";
             this.tsbRetrieveStats.ToolTipText = "Show interesting stats from MRU list";
             this.tsbRetrieveStats.Click += new System.EventHandler(this.tsbRetrieveStats_Click);
@@ -188,7 +188,7 @@
             this.tsbPin.Image = ((System.Drawing.Image)(resources.GetObject("tsbPin.Image")));
             this.tsbPin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPin.Name = "tsbPin";
-            this.tsbPin.Size = new System.Drawing.Size(435, 45);
+            this.tsbPin.Size = new System.Drawing.Size(411, 45);
             this.tsbPin.Text = "Pin/Unpin for selected users";
             this.tsbPin.Click += new System.EventHandler(this.tsbPin_Click);
             // 
@@ -202,7 +202,7 @@
             this.tsbReset.Image = ((System.Drawing.Image)(resources.GetObject("tsbReset.Image")));
             this.tsbReset.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbReset.Name = "tsbReset";
-            this.tsbReset.Size = new System.Drawing.Size(134, 45);
+            this.tsbReset.Size = new System.Drawing.Size(110, 45);
             this.tsbReset.Text = "Reset";
             this.tsbReset.ToolTipText = "Reset Pinned items list";
             this.tsbReset.Click += new System.EventHandler(this.tsbReset_Click);
@@ -230,16 +230,6 @@
             this.splitContainer1.SplitterDistance = 650;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
-            // 
-            // userSelector1
-            // 
-            this.userSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userSelector1.Location = new System.Drawing.Point(0, 0);
-            this.userSelector1.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
-            this.userSelector1.Name = "userSelector1";
-            this.userSelector1.Service = null;
-            this.userSelector1.Size = new System.Drawing.Size(650, 1862);
-            this.userSelector1.TabIndex = 1;
             // 
             // panel1
             // 
@@ -311,10 +301,12 @@
             // columnHeader9
             // 
             this.columnHeader9.Text = "Entity";
+            this.columnHeader9.Width = 100;
             // 
             // columnHeader10
             // 
             this.columnHeader10.Text = "Name";
+            this.columnHeader10.Width = 250;
             // 
             // columnHeader13
             // 
@@ -339,10 +331,12 @@
             // columnHeader11
             // 
             this.columnHeader11.Text = "Entity";
+            this.columnHeader11.Width = 100;
             // 
             // columnHeader12
             // 
             this.columnHeader12.Text = "Name";
+            this.columnHeader12.Width = 250;
             // 
             // columnHeader14
             // 
@@ -419,14 +413,17 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Entity";
+            this.columnHeader5.Width = 100;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Name";
+            this.columnHeader6.Width = 250;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Last Accessed";
+            this.columnHeader7.Width = 125;
             // 
             // columnHeader8
             // 
@@ -489,15 +486,17 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Entity";
+            this.columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 250;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Last Accessed";
-            this.columnHeader3.Width = 172;
+            this.columnHeader3.Width = 125;
             // 
             // columnHeader4
             // 
@@ -524,6 +523,16 @@
             this.recordPinUnselect.Name = "recordPinUnselect";
             this.recordPinUnselect.Size = new System.Drawing.Size(354, 46);
             this.recordPinUnselect.Text = "Remove Pin";
+            // 
+            // userSelector1
+            // 
+            this.userSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userSelector1.Location = new System.Drawing.Point(0, 0);
+            this.userSelector1.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
+            this.userSelector1.Name = "userSelector1";
+            this.userSelector1.Service = null;
+            this.userSelector1.Size = new System.Drawing.Size(650, 1862);
+            this.userSelector1.TabIndex = 1;
             // 
             // MainControl
             // 

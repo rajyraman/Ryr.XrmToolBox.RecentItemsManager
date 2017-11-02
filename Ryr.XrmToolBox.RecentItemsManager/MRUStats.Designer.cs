@@ -61,6 +61,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.recentItems.GridLines = true;
             this.recentItems.Location = new System.Drawing.Point(3, 34);
             this.recentItems.Name = "recentItems";
             this.recentItems.Size = new System.Drawing.Size(722, 1449);
@@ -87,6 +88,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.recentItems);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(731, 1520);
@@ -101,6 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.recentViews);
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(749, 15);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1249, 1526);
@@ -119,6 +122,7 @@
             this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8});
+            this.recentViews.GridLines = true;
             this.recentViews.Location = new System.Drawing.Point(3, 34);
             this.recentViews.Name = "recentViews";
             this.recentViews.Size = new System.Drawing.Size(1240, 1455);
@@ -153,6 +157,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.AutoSize = true;
             this.groupBox3.Controls.Add(this.recentDashboards);
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(2004, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1270, 1535);
@@ -171,6 +176,7 @@
             this.columnHeader11,
             this.columnHeader12,
             this.columnHeader13});
+            this.recentDashboards.GridLines = true;
             this.recentDashboards.Location = new System.Drawing.Point(3, 34);
             this.recentDashboards.Name = "recentDashboards";
             this.recentDashboards.Size = new System.Drawing.Size(1261, 1464);
@@ -210,6 +216,7 @@
             this.DoubleBuffered = true;
             this.Name = "MRUStats";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Recent Stats";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -219,8 +226,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView recentItems;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView recentViews;
@@ -239,5 +244,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ListView recentItems;
     }
 }

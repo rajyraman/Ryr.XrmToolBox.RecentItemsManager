@@ -79,7 +79,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(997, 60);
             this.panel1.TabIndex = 5;
@@ -91,7 +91,7 @@
             this.panel2.Controls.Add(this.llCheckAll);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 60);
-            this.panel2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(997, 50);
             this.panel2.TabIndex = 7;
@@ -134,9 +134,10 @@
             // 
             // lvUsers
             // 
+            this.lvUsers.CheckBoxes = true;
             this.lvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvUsers.FullRowSelect = true;
-            this.lvUsers.HideSelection = false;
+            this.lvUsers.GridLines = true;
             this.lvUsers.Location = new System.Drawing.Point(0, 110);
             this.lvUsers.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.lvUsers.Name = "lvUsers";
@@ -147,6 +148,7 @@
             this.lvUsers.UseCompatibleStateImageBehavior = false;
             this.lvUsers.View = System.Windows.Forms.View.Details;
             this.lvUsers.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvUsers_ColumnClick);
+            this.lvUsers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvUsers_ItemChecked);
             this.lvUsers.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvUsers_ItemSelectionChanged);
             // 
             // UserSelector

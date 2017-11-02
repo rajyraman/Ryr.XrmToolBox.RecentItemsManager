@@ -20,7 +20,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager.UserControls
 
         public List<Entity> SelectedItems
         {
-            get { return lvUsers.SelectedItems.Cast<ListViewItem>().Select(e => (Entity)e.Tag).ToList(); }
+            get { return lvUsers.CheckedItems.Cast<ListViewItem>().Select(e => (Entity)e.Tag).ToList(); }
         }
         public List<Entity> Items
         {
@@ -36,7 +36,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager.UserControls
                     LoadViews();
                 }
             }
-            get { return service; }
+            get => service;
         }
 
         public void LoadViews()
@@ -156,6 +156,11 @@ namespace Ryr.XrmToolBox.RecentItemsManager.UserControls
         private void lvUsers_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             ((MainControl)this.Parent.Parent.Parent).LoadSettings();
+        }
+
+        private void lvUsers_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            e.Item.Selected = e.Item.Checked;
         }
     }
 }
