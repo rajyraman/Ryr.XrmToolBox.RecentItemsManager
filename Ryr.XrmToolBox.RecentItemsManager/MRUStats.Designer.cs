@@ -54,17 +54,15 @@
             // 
             // recentItems
             // 
-            this.recentItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.recentItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.recentItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentItems.GridLines = true;
-            this.recentItems.Location = new System.Drawing.Point(3, 34);
+            this.recentItems.Location = new System.Drawing.Point(10, 50);
             this.recentItems.Name = "recentItems";
-            this.recentItems.Size = new System.Drawing.Size(722, 1449);
+            this.recentItems.Size = new System.Drawing.Size(711, 1460);
             this.recentItems.TabIndex = 0;
             this.recentItems.UseCompatibleStateImageBehavior = false;
             this.recentItems.View = System.Windows.Forms.View.Details;
@@ -91,6 +89,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox1.Size = new System.Drawing.Size(731, 1520);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -106,6 +105,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(749, 15);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox2.Size = new System.Drawing.Size(1249, 1526);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
@@ -113,19 +113,17 @@
             // 
             // recentViews
             // 
-            this.recentViews.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.recentViews.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8});
+            this.recentViews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentViews.GridLines = true;
-            this.recentViews.Location = new System.Drawing.Point(3, 34);
+            this.recentViews.Location = new System.Drawing.Point(10, 50);
             this.recentViews.Name = "recentViews";
-            this.recentViews.Size = new System.Drawing.Size(1240, 1455);
+            this.recentViews.Size = new System.Drawing.Size(1229, 1466);
             this.recentViews.TabIndex = 0;
             this.recentViews.UseCompatibleStateImageBehavior = false;
             this.recentViews.View = System.Windows.Forms.View.Details;
@@ -160,6 +158,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(2004, 12);
             this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox3.Size = new System.Drawing.Size(1270, 1535);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
@@ -167,19 +166,17 @@
             // 
             // recentDashboards
             // 
-            this.recentDashboards.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.recentDashboards.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11,
             this.columnHeader12,
             this.columnHeader13});
+            this.recentDashboards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentDashboards.GridLines = true;
-            this.recentDashboards.Location = new System.Drawing.Point(3, 34);
+            this.recentDashboards.Location = new System.Drawing.Point(10, 50);
             this.recentDashboards.Name = "recentDashboards";
-            this.recentDashboards.Size = new System.Drawing.Size(1261, 1464);
+            this.recentDashboards.Size = new System.Drawing.Size(1250, 1475);
             this.recentDashboards.TabIndex = 0;
             this.recentDashboards.UseCompatibleStateImageBehavior = false;
             this.recentDashboards.View = System.Windows.Forms.View.Details;

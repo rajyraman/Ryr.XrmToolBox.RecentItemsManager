@@ -16,8 +16,6 @@ namespace Ryr.XrmToolBox.RecentItemsManager
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IHelpPlugin, IMessageBusHost
     {
         private const string ACTIVE_USERS_FETCH = @"<fetch version='1.0' output-format='xml-platform' mapping='logical' ><entity name='systemuser' ><attribute name='fullname' /><order attribute='fullname' descending='false' /><attribute name='businessunitid' /><attribute name='siteid' /><filter type='and' ><condition attribute='isdisabled' operator='eq' value='0' /><condition attribute='accessmode' operator='ne' value='3' /></filter><attribute name='systemuserid' /></entity></fetch>";
-        private int recentRecordsColumnOrder;
-        private int recentViewsColumnOrder;
         private RecentItemsHelper _recentItemsHelper;
         public MainControl()
         {
@@ -30,13 +28,22 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             userSelector1.LoadViews();
             _recentItemsHelper = new RecentItemsHelper(Service, ConnectionDetail);
             ClearPinLists();
+            tsbRetrieveStats.Enabled = true;
         }
 
         public void LoadSettings()
         {
+            if (Service != null && userSelector1.Service == null)
+            {
+                userSelector1.Service = Service;
+            }
+            if (_recentItemsHelper == null)
+            {
+                _recentItemsHelper = new RecentItemsHelper(Service, ConnectionDetail);
+            }
             WorkAsync(new WorkAsyncInfo
             {
-                Message = "Initializing...",
+                Message = "Retrieving MRU items...",
                 AsyncArgument = userSelector1.SelectedItems,
                 Work = (bw, e) =>
                 {
@@ -97,7 +104,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
         {
             WorkAsync(new WorkAsyncInfo
             {
-                Message = "Initializing...",
+                Message = "Calculating stats based on MRU items...",
                 AsyncArgument = userSelector1.Items,
                 Work = (bw, o) =>
                 {
@@ -125,7 +132,6 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             {
                 userSelector1.Service = Service;
             }
-            ExecuteMethod(LoadSettings);
             var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
             var fetchXml = (((ComboBox)userSelector1.Controls.Find("cbbViews", true)?[0]).SelectedItem as ViewItem)?.FetchXml;
             messageBusEventArgs.TargetArgument = fetchXml ?? ACTIVE_USERS_FETCH;
@@ -140,38 +146,24 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             if (Service != null && userSelector1.Service == null)
             {
                 userSelector1.Service = Service;
+                _recentItemsHelper = new RecentItemsHelper(Service, ConnectionDetail);
+            }
+            ClearPinLists();
+            if (tsbRetrieveStats.Enabled)
+            {
+                tsbRetrieveStats.Enabled = true;
             }
             userSelector1.PopulateUsers(fetchXml);
         }
 
         public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
 
-        private void recordList_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void recentItemsList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (e.Column == recentRecordsColumnOrder)
-            {
-                recordList.Sorting = recordList.Sorting == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-                recordList.ListViewItemSorter = new ListViewItemComparer(e.Column, recordList.Sorting);
-            }
-            else
-            {
-                recentRecordsColumnOrder = e.Column;
-                recordList.ListViewItemSorter = new ListViewItemComparer(e.Column, SortOrder.Ascending);
-            }
-        }
-
-        private void viewList_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            if (e.Column == recentViewsColumnOrder)
-            {
-                viewList.Sorting = recordList.Sorting == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-                viewList.ListViewItemSorter = new ListViewItemComparer(e.Column, viewList.Sorting);
-            }
-            else
-            {
-                recentViewsColumnOrder = e.Column;
-                viewList.ListViewItemSorter = new ListViewItemComparer(e.Column, SortOrder.Ascending);
-            }
+            var list = (ListView) sender;
+            list.SelectedItems.Clear();
+            list.Sorting = list.Sorting == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+            list.ListViewItemSorter = new ListViewItemComparer(e.Column, list.Sorting);
         }
 
         private void recordList_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -195,23 +187,27 @@ namespace Ryr.XrmToolBox.RecentItemsManager
 
         }
 
-        private void recordContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void pinContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            PopulatePinListView(recordList, recordsPinList);
-        }
-        private void viewContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            PopulatePinListView(viewList, viewPinList);
+            var toPinList = ((ContextMenuStrip) sender).SourceControl;
+            if (toPinList.Name == "recordList")
+            {
+                PopulatePinListView(recordList, recordsPinList, e.ClickedItem.Text);
+            }
+            else
+            {
+                PopulatePinListView(viewList, viewPinList, e.ClickedItem.Text);
+            }
         }
 
-        private void PopulatePinListView(ListView sourceList, ListView targetList)
+        private void PopulatePinListView(ListView sourceList, ListView targetList, string clickedOption)
         {
             if (sourceList.SelectedItems.Count == 0) return;
 
             foreach (ListViewItem record in sourceList.SelectedItems)
             {
                 var pinItem = (RecentlyViewedItem) record.Tag;
-                pinItem.PinStatus = pinItem.PinStatus == "Yes" ? "No" : "Yes";
+                pinItem.PinStatus = clickedOption == "Pin" ? "Yes" : "No";
                 var listItem = new ListViewItem
                 {
                     Text = record.Text,
@@ -234,7 +230,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
         {
             WorkAsync(new WorkAsyncInfo
             {
-                Message = "Initializing...",
+                Message = "Updating Pin status...",
                 AsyncArgument = userSelector1.SelectedItems,
                 Work = (bw, e) =>
                 {

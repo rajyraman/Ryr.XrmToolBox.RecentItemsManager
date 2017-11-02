@@ -65,18 +65,15 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.viewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewPinSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
+            this.pinUnpinContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.recordPinSelect = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.recordList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.recordContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.recordPinSelect = new System.Windows.Forms.ToolStripMenuItem();
-            this.recordPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
             this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -91,9 +88,8 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.viewContextMenu.SuspendLayout();
+            this.pinUnpinContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.recordContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -125,7 +121,7 @@
             this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(23, 45);
+            this.tsbClose.Size = new System.Drawing.Size(44, 45);
             this.tsbClose.Text = "Close this tool";
             this.tsbClose.Click += new System.EventHandler(this.TsbCloseClick);
             // 
@@ -139,7 +135,7 @@
             this.tsbLoadUsers.Image = ((System.Drawing.Image)(resources.GetObject("tsbLoadUsers.Image")));
             this.tsbLoadUsers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLoadUsers.Name = "tsbLoadUsers";
-            this.tsbLoadUsers.Size = new System.Drawing.Size(184, 45);
+            this.tsbLoadUsers.Size = new System.Drawing.Size(208, 45);
             this.tsbLoadUsers.Text = "Load Users";
             this.tsbLoadUsers.ToolTipText = "Load Users";
             this.tsbLoadUsers.Click += new System.EventHandler(this.tsbLoadCrmItems_Click);
@@ -159,7 +155,7 @@
             this.tsbEditInFXB.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditInFXB.Image")));
             this.tsbEditInFXB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditInFXB.Name = "tsbEditInFXB";
-            this.tsbEditInFXB.Size = new System.Drawing.Size(345, 45);
+            this.tsbEditInFXB.Size = new System.Drawing.Size(369, 45);
             this.tsbEditInFXB.Text = "Choose users from FXB";
             this.tsbEditInFXB.Click += new System.EventHandler(this.tsbEditInFXB_Click);
             // 
@@ -170,10 +166,11 @@
             // 
             // tsbRetrieveStats
             // 
+            this.tsbRetrieveStats.Enabled = false;
             this.tsbRetrieveStats.Image = ((System.Drawing.Image)(resources.GetObject("tsbRetrieveStats.Image")));
             this.tsbRetrieveStats.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRetrieveStats.Name = "tsbRetrieveStats";
-            this.tsbRetrieveStats.Size = new System.Drawing.Size(313, 45);
+            this.tsbRetrieveStats.Size = new System.Drawing.Size(337, 45);
             this.tsbRetrieveStats.Text = "Retrieve Recent Stats";
             this.tsbRetrieveStats.ToolTipText = "Show interesting stats from MRU list";
             this.tsbRetrieveStats.Click += new System.EventHandler(this.tsbRetrieveStats_Click);
@@ -188,7 +185,7 @@
             this.tsbPin.Image = ((System.Drawing.Image)(resources.GetObject("tsbPin.Image")));
             this.tsbPin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPin.Name = "tsbPin";
-            this.tsbPin.Size = new System.Drawing.Size(411, 45);
+            this.tsbPin.Size = new System.Drawing.Size(435, 45);
             this.tsbPin.Text = "Pin/Unpin for selected users";
             this.tsbPin.Click += new System.EventHandler(this.tsbPin_Click);
             // 
@@ -202,7 +199,7 @@
             this.tsbReset.Image = ((System.Drawing.Image)(resources.GetObject("tsbReset.Image")));
             this.tsbReset.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbReset.Name = "tsbReset";
-            this.tsbReset.Size = new System.Drawing.Size(110, 45);
+            this.tsbReset.Size = new System.Drawing.Size(134, 45);
             this.tsbReset.Text = "Reset";
             this.tsbReset.ToolTipText = "Reset Pinned items list";
             this.tsbReset.Click += new System.EventHandler(this.tsbReset_Click);
@@ -396,7 +393,7 @@
             this.columnHeader6,
             this.columnHeader7,
             this.columnHeader8});
-            this.viewList.ContextMenuStrip = this.viewContextMenu;
+            this.viewList.ContextMenuStrip = this.pinUnpinContextMenu;
             this.viewList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.viewList.FullRowSelect = true;
             this.viewList.GridLines = true;
@@ -407,7 +404,7 @@
             this.viewList.TabIndex = 0;
             this.viewList.UseCompatibleStateImageBehavior = false;
             this.viewList.View = System.Windows.Forms.View.Details;
-            this.viewList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.viewList_ColumnClick);
+            this.viewList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.recentItemsList_ColumnClick);
             this.viewList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.viewList_MouseDoubleClick);
             // 
             // columnHeader5
@@ -429,27 +426,27 @@
             // 
             this.columnHeader8.Text = "Pinned";
             // 
-            // viewContextMenu
+            // pinUnpinContextMenu
             // 
-            this.viewContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.viewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewPinSelect,
-            this.viewPinUnselect});
-            this.viewContextMenu.Name = "viewContextMenu";
-            this.viewContextMenu.Size = new System.Drawing.Size(355, 96);
-            this.viewContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.viewContextMenu_ItemClicked);
+            this.pinUnpinContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.pinUnpinContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recordPinSelect,
+            this.recordPinUnselect});
+            this.pinUnpinContextMenu.Name = "recordContextMenu";
+            this.pinUnpinContextMenu.Size = new System.Drawing.Size(253, 96);
+            this.pinUnpinContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.pinContextMenu_ItemClicked);
             // 
-            // viewPinSelect
+            // recordPinSelect
             // 
-            this.viewPinSelect.Name = "viewPinSelect";
-            this.viewPinSelect.Size = new System.Drawing.Size(354, 46);
-            this.viewPinSelect.Text = "Select to be pinned";
+            this.recordPinSelect.Name = "recordPinSelect";
+            this.recordPinSelect.Size = new System.Drawing.Size(252, 46);
+            this.recordPinSelect.Text = "Pin";
             // 
-            // viewPinUnselect
+            // recordPinUnselect
             // 
-            this.viewPinUnselect.Name = "viewPinUnselect";
-            this.viewPinUnselect.Size = new System.Drawing.Size(354, 46);
-            this.viewPinUnselect.Text = "Remove Pin";
+            this.recordPinUnselect.Name = "recordPinUnselect";
+            this.recordPinUnselect.Size = new System.Drawing.Size(252, 46);
+            this.recordPinUnselect.Text = "Remove Pin";
             // 
             // groupBox1
             // 
@@ -469,7 +466,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.recordList.ContextMenuStrip = this.recordContextMenu;
+            this.recordList.ContextMenuStrip = this.pinUnpinContextMenu;
             this.recordList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recordList.FullRowSelect = true;
             this.recordList.GridLines = true;
@@ -480,7 +477,7 @@
             this.recordList.TabIndex = 0;
             this.recordList.UseCompatibleStateImageBehavior = false;
             this.recordList.View = System.Windows.Forms.View.Details;
-            this.recordList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.recordList_ColumnClick);
+            this.recordList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.recentItemsList_ColumnClick);
             this.recordList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.recordList_MouseDoubleClick);
             // 
             // columnHeader1
@@ -501,28 +498,6 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Pinned";
-            // 
-            // recordContextMenu
-            // 
-            this.recordContextMenu.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.recordContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.recordPinSelect,
-            this.recordPinUnselect});
-            this.recordContextMenu.Name = "recordContextMenu";
-            this.recordContextMenu.Size = new System.Drawing.Size(355, 96);
-            this.recordContextMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.recordContextMenu_ItemClicked);
-            // 
-            // recordPinSelect
-            // 
-            this.recordPinSelect.Name = "recordPinSelect";
-            this.recordPinSelect.Size = new System.Drawing.Size(354, 46);
-            this.recordPinSelect.Text = "Select to be pinned";
-            // 
-            // recordPinUnselect
-            // 
-            this.recordPinUnselect.Name = "recordPinUnselect";
-            this.recordPinUnselect.Size = new System.Drawing.Size(354, 46);
-            this.recordPinUnselect.Text = "Remove Pin";
             // 
             // userSelector1
             // 
@@ -558,9 +533,8 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.viewContextMenu.ResumeLayout(false);
+            this.pinUnpinContextMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.recordContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -599,16 +573,13 @@
         private System.Windows.Forms.ListView viewPinList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ContextMenuStrip recordContextMenu;
+        private System.Windows.Forms.ContextMenuStrip pinUnpinContextMenu;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ToolStripMenuItem recordPinSelect;
         private System.Windows.Forms.ToolStripMenuItem recordPinUnselect;
-        private System.Windows.Forms.ContextMenuStrip viewContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem viewPinSelect;
-        private System.Windows.Forms.ToolStripMenuItem viewPinUnselect;
         private System.Windows.Forms.ToolStripButton tsbReset;
         private System.Windows.Forms.ToolStripButton tsbPin;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
