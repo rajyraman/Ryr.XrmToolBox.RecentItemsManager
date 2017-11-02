@@ -1,7 +1,12 @@
 # Recent Items Manager
 XrmToolBox plugin to view and manager user's recent items and pin them if required.
 
-![Screenshot](Screenshot.png)
-![Stats](Stats.png)
+# Installation
+Install the tool from XrmToolBox store
 
-WORK IN PROGRESS (23-OCT-2017)
+# Usage
+![Usage](Screencast.gif)
+
+# Credits
+* [Push pin icon by Freepik](https://www.flaticon.com/free-icon/push-pin_265701)
+* [User Settings Utility](https://github.com/MscrmTools/MsCrmTools.UserSettingsUtility) by Tanguy
