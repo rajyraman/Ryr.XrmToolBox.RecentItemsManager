@@ -34,9 +34,9 @@
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbLoadUsers = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditInFXB = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbRetrievePins = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbRetrieveStats = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -45,6 +45,7 @@
             this.tsbReset = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -74,7 +75,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.userSelector1 = new Ryr.XrmToolBox.RecentItemsManager.UserControls.UserSelector();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -98,9 +99,10 @@
             this.tsbClose,
             this.toolStripSeparator1,
             this.tsbLoadUsers,
-            this.toolStripSeparator5,
             this.toolStripSeparator2,
             this.tsbEditInFXB,
+            this.toolStripSeparator8,
+            this.tsbRetrievePins,
             this.toolStripSeparator3,
             this.tsbRetrieveStats,
             this.toolStripSeparator4,
@@ -121,7 +123,7 @@
             this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(44, 45);
+            this.tsbClose.Size = new System.Drawing.Size(23, 45);
             this.tsbClose.Text = "Close this tool";
             this.tsbClose.Click += new System.EventHandler(this.TsbCloseClick);
             // 
@@ -140,16 +142,6 @@
             this.tsbLoadUsers.ToolTipText = "Load Users";
             this.tsbLoadUsers.Click += new System.EventHandler(this.tsbLoadCrmItems_Click);
             // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 48);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
-            // 
             // tsbEditInFXB
             // 
             this.tsbEditInFXB.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditInFXB.Image")));
@@ -158,6 +150,21 @@
             this.tsbEditInFXB.Size = new System.Drawing.Size(369, 45);
             this.tsbEditInFXB.Text = "Choose users from FXB";
             this.tsbEditInFXB.Click += new System.EventHandler(this.tsbEditInFXB_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 48);
+            // 
+            // tsbRetrievePins
+            // 
+            this.tsbRetrievePins.Enabled = false;
+            this.tsbRetrievePins.Image = ((System.Drawing.Image)(resources.GetObject("tsbRetrievePins.Image")));
+            this.tsbRetrievePins.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRetrievePins.Name = "tsbRetrievePins";
+            this.tsbRetrievePins.Size = new System.Drawing.Size(347, 45);
+            this.tsbRetrievePins.Text = "Retrieve Recent Items";
+            this.tsbRetrievePins.Click += new System.EventHandler(this.tsbRetrievePins_Click);
             // 
             // toolStripSeparator3
             // 
@@ -227,6 +234,16 @@
             this.splitContainer1.SplitterDistance = 650;
             this.splitContainer1.SplitterWidth = 7;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // userSelector1
+            // 
+            this.userSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userSelector1.Location = new System.Drawing.Point(0, 0);
+            this.userSelector1.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
+            this.userSelector1.Name = "userSelector1";
+            this.userSelector1.Service = null;
+            this.userSelector1.Size = new System.Drawing.Size(650, 1862);
+            this.userSelector1.TabIndex = 1;
             // 
             // panel1
             // 
@@ -499,15 +516,10 @@
             // 
             this.columnHeader4.Text = "Pinned";
             // 
-            // userSelector1
+            // toolStripSeparator2
             // 
-            this.userSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userSelector1.Location = new System.Drawing.Point(0, 0);
-            this.userSelector1.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
-            this.userSelector1.Name = "userSelector1";
-            this.userSelector1.Service = null;
-            this.userSelector1.Size = new System.Drawing.Size(650, 1862);
-            this.userSelector1.TabIndex = 1;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
             // 
             // MainControl
             // 
@@ -549,7 +561,6 @@
         private System.Windows.Forms.ToolStripButton tsbLoadUsers;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbRetrieveStats;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton tsbEditInFXB;
@@ -582,10 +593,12 @@
         private System.Windows.Forms.ToolStripMenuItem recordPinUnselect;
         private System.Windows.Forms.ToolStripButton tsbReset;
         private System.Windows.Forms.ToolStripButton tsbPin;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton tsbRetrievePins;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

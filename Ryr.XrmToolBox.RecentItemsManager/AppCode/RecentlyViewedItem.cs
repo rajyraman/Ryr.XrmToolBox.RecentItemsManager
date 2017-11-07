@@ -15,7 +15,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager.AppCode
     public class RecentlyViewedItem
     {
         public RecentlyViewedType Type { get; set; }
-        public Guid ObjectId { get; set; }
+        public Guid? ObjectId { get; set; }
         public int EntityTypeCode { get; set; }
         public string DisplayName { get; set; }
         public string Title { get; set; }

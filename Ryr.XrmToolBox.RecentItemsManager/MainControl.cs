@@ -22,6 +22,12 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             InitializeComponent();
         }
 
+        protected override void OnConnectionUpdated(ConnectionUpdatedEventArgs e)
+        {
+            base.OnConnectionUpdated(e);
+            ExecuteMethod(LoadUsers);
+        }
+
         private void LoadUsers()
         {
             userSelector1.Service = Service;
@@ -29,6 +35,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             _recentItemsHelper = new RecentItemsHelper(Service, ConnectionDetail);
             ClearPinLists();
             tsbRetrieveStats.Enabled = true;
+            tsbRetrievePins.Enabled = true;
         }
 
         public void LoadSettings()
@@ -266,6 +273,11 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             viewPinList.Items.Clear();
             recordList.Items.Clear();
             recordsPinList.Items.Clear();
+        }
+
+        private void tsbRetrievePins_Click(object sender, EventArgs e)
+        {
+            LoadSettings();
         }
     }
 }

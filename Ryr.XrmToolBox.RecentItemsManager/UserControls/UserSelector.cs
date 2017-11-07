@@ -152,15 +152,5 @@ namespace Ryr.XrmToolBox.RecentItemsManager.UserControls
                 lvUsers.ListViewItemSorter = new ListViewItemComparer(e.Column, SortOrder.Ascending);
             }
         }
-
-        private void lvUsers_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            ((MainControl)this.Parent.Parent.Parent).LoadSettings();
-        }
-
-        private void lvUsers_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            e.Item.Selected = e.Item.Checked;
-        }
     }
 }

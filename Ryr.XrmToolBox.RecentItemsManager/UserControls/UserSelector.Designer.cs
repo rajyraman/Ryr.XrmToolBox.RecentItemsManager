@@ -148,8 +148,6 @@
             this.lvUsers.UseCompatibleStateImageBehavior = false;
             this.lvUsers.View = System.Windows.Forms.View.Details;
             this.lvUsers.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvUsers_ColumnClick);
-            this.lvUsers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvUsers_ItemChecked);
-            this.lvUsers.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvUsers_ItemSelectionChanged);
             // 
             // UserSelector
             // 

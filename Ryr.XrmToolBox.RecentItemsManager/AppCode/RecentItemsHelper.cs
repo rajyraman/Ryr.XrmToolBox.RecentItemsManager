@@ -57,7 +57,8 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                             new RecentlyViewedItem
                             {
                                 Type = (RecentlyViewedType)int.Parse(r.Element("Type").Value),
-                                ObjectId = Guid.Parse(r.Element("ObjectId").Value),
+                                ObjectId = Guid.TryParse(r.Element("ObjectId")?.Value, out Guid o) ? 
+                                           o : (Guid?)null,
                                 EntityTypeCode = int.Parse(r.Element("EntityTypeCode").Value),
                                 DisplayName = r.Element("DisplayName").Value == "System Form" ? "Dashboard" : r.Element("DisplayName").Value,
                                 Title = r.Element("Title").Value,
@@ -130,7 +131,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                     {
                         var pinStatus = pinItem.PinStatus == "Yes" ? "true" : "false";
                         var matchedXml = recentXmlForUser.FirstOrDefault(x =>
-                            x.RecentlyViewedXmlElements.Any(y => y.Element("ObjectId").Value.Equals(pinItem.ObjectId.ToString("B"),
+                            x.RecentlyViewedXmlElements.Any(y => y.Element("ObjectId").Value.Equals(pinItem.ObjectId?.ToString("B"),
                             StringComparison.CurrentCultureIgnoreCase)));
                         var pin = new Entity("userentityuisettings")
                         {
@@ -139,7 +140,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                         if (matchedXml != null)
                         {
                             var f = matchedXml.RecentlyViewedXmlElements.First(x =>
-                                x.Element("ObjectId").Value.Equals(pinItem.ObjectId.ToString("B"),
+                                x.Element("ObjectId").Value.Equals(pinItem.ObjectId?.ToString("B"),
                                 StringComparison.CurrentCultureIgnoreCase));
                             f.Element("PinStatus").Value = pinStatus;
                             pin["recentlyviewedxml"] = $@"<RecentlyViewedEntityData etc=""{pinItem.EntityTypeCode}"">{string.Join("", matchedXml.RecentlyViewedXmlElements)}</RecentlyViewedEntityData>";

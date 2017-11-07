@@ -59,10 +59,11 @@
             this.columnHeader2,
             this.columnHeader3});
             this.recentItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recentItems.FullRowSelect = true;
             this.recentItems.GridLines = true;
             this.recentItems.Location = new System.Drawing.Point(10, 50);
             this.recentItems.Name = "recentItems";
-            this.recentItems.Size = new System.Drawing.Size(711, 1460);
+            this.recentItems.Size = new System.Drawing.Size(711, 1444);
             this.recentItems.TabIndex = 0;
             this.recentItems.UseCompatibleStateImageBehavior = false;
             this.recentItems.View = System.Windows.Forms.View.Details;
@@ -81,32 +82,26 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.recentItems);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(731, 1520);
+            this.groupBox1.Size = new System.Drawing.Size(731, 1504);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "All Items";
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.recentViews);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(749, 15);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox2.Size = new System.Drawing.Size(1249, 1526);
+            this.groupBox2.Size = new System.Drawing.Size(1501, 1501);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Views";
@@ -120,10 +115,11 @@
             this.columnHeader7,
             this.columnHeader8});
             this.recentViews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recentViews.FullRowSelect = true;
             this.recentViews.GridLines = true;
             this.recentViews.Location = new System.Drawing.Point(10, 50);
             this.recentViews.Name = "recentViews";
-            this.recentViews.Size = new System.Drawing.Size(1229, 1466);
+            this.recentViews.Size = new System.Drawing.Size(1481, 1441);
             this.recentViews.TabIndex = 0;
             this.recentViews.UseCompatibleStateImageBehavior = false;
             this.recentViews.View = System.Windows.Forms.View.Details;
@@ -150,16 +146,15 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.AutoSize = true;
             this.groupBox3.Controls.Add(this.recentDashboards);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(2004, 12);
+            this.groupBox3.Location = new System.Drawing.Point(2256, 15);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(1270, 1535);
+            this.groupBox3.Size = new System.Drawing.Size(1018, 1501);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dashboards";
@@ -173,10 +168,11 @@
             this.columnHeader12,
             this.columnHeader13});
             this.recentDashboards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recentDashboards.FullRowSelect = true;
             this.recentDashboards.GridLines = true;
             this.recentDashboards.Location = new System.Drawing.Point(10, 50);
             this.recentDashboards.Name = "recentDashboards";
-            this.recentDashboards.Size = new System.Drawing.Size(1250, 1475);
+            this.recentDashboards.Size = new System.Drawing.Size(998, 1441);
             this.recentDashboards.TabIndex = 0;
             this.recentDashboards.UseCompatibleStateImageBehavior = false;
             this.recentDashboards.View = System.Windows.Forms.View.Details;
