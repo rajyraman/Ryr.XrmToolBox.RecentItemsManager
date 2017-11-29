@@ -25,5 +25,6 @@ namespace Ryr.XrmToolBox.RecentItemsManager.AppCode
         public Guid? ProcessInstanceId { get; set; }
         public Guid? ProcessId { get; set; }
         public DateTime LastAccessed { get; set; }
+        public string User { get; set; }
     }
 }

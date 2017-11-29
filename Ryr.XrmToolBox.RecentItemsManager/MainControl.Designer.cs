@@ -34,6 +34,7 @@
             this.tsbClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbLoadUsers = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditInFXB = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbRetrievePins = new System.Windows.Forms.ToolStripButton();
@@ -62,20 +63,21 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.viewList = new System.Windows.Forms.ListView();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewEntity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewLastAccessed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewIsPinned = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pinUnpinContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.recordPinSelect = new System.Windows.Forms.ToolStripMenuItem();
             this.recordPinUnselect = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.recordList = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.recordEntity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.recordName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.recordUser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.viewUser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.recordPinned = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.recordLastAccessed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -123,7 +125,7 @@
             this.tsbClose.Image = ((System.Drawing.Image)(resources.GetObject("tsbClose.Image")));
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(23, 45);
+            this.tsbClose.Size = new System.Drawing.Size(44, 45);
             this.tsbClose.Text = "Close this tool";
             this.tsbClose.Click += new System.EventHandler(this.TsbCloseClick);
             // 
@@ -141,6 +143,11 @@
             this.tsbLoadUsers.Text = "Load Users";
             this.tsbLoadUsers.ToolTipText = "Load Users";
             this.tsbLoadUsers.Click += new System.EventHandler(this.tsbLoadCrmItems_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
             // 
             // tsbEditInFXB
             // 
@@ -406,10 +413,11 @@
             // viewList
             // 
             this.viewList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
+            this.viewUser,
+            this.viewEntity,
+            this.viewName,
+            this.viewIsPinned,
+            this.viewLastAccessed});
             this.viewList.ContextMenuStrip = this.pinUnpinContextMenu;
             this.viewList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.viewList.FullRowSelect = true;
@@ -424,24 +432,24 @@
             this.viewList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.recentItemsList_ColumnClick);
             this.viewList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.viewList_MouseDoubleClick);
             // 
-            // columnHeader5
+            // viewEntity
             // 
-            this.columnHeader5.Text = "Entity";
-            this.columnHeader5.Width = 100;
+            this.viewEntity.Text = "Entity";
+            this.viewEntity.Width = 100;
             // 
-            // columnHeader6
+            // viewName
             // 
-            this.columnHeader6.Text = "Name";
-            this.columnHeader6.Width = 250;
+            this.viewName.Text = "Name";
+            this.viewName.Width = 250;
             // 
-            // columnHeader7
+            // viewLastAccessed
             // 
-            this.columnHeader7.Text = "Last Accessed";
-            this.columnHeader7.Width = 125;
+            this.viewLastAccessed.Text = "Last Accessed";
+            this.viewLastAccessed.Width = 125;
             // 
-            // columnHeader8
+            // viewIsPinned
             // 
-            this.columnHeader8.Text = "Pinned";
+            this.viewIsPinned.Text = "Pinned";
             // 
             // pinUnpinContextMenu
             // 
@@ -479,10 +487,11 @@
             // recordList
             // 
             this.recordList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
+            this.recordUser,
+            this.recordEntity,
+            this.recordName,
+            this.recordPinned,
+            this.recordLastAccessed});
             this.recordList.ContextMenuStrip = this.pinUnpinContextMenu;
             this.recordList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recordList.FullRowSelect = true;
@@ -497,29 +506,32 @@
             this.recordList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.recentItemsList_ColumnClick);
             this.recordList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.recordList_MouseDoubleClick);
             // 
-            // columnHeader1
+            // recordEntity
             // 
-            this.columnHeader1.Text = "Entity";
-            this.columnHeader1.Width = 100;
+            this.recordEntity.Text = "Entity";
+            this.recordEntity.Width = 100;
             // 
-            // columnHeader2
+            // recordName
             // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 250;
+            this.recordName.Text = "Name";
+            this.recordName.Width = 250;
             // 
-            // columnHeader3
+            // recordUser
             // 
-            this.columnHeader3.Text = "Last Accessed";
-            this.columnHeader3.Width = 125;
+            this.recordUser.Text = "User";
             // 
-            // columnHeader4
+            // viewUser
             // 
-            this.columnHeader4.Text = "Pinned";
+            this.viewUser.Text = "User";
             // 
-            // toolStripSeparator2
+            // recordPinned
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
+            this.recordPinned.Text = "Pinned";
+            // 
+            // recordLastAccessed
+            // 
+            this.recordLastAccessed.Text = "Last Accessed";
+            this.recordLastAccessed.Width = 125;
             // 
             // MainControl
             // 
@@ -570,14 +582,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView recordList;
         private System.Windows.Forms.ListView viewList;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader recordEntity;
+        private System.Windows.Forms.ColumnHeader recordName;
+        private System.Windows.Forms.ColumnHeader viewEntity;
+        private System.Windows.Forms.ColumnHeader viewName;
+        private System.Windows.Forms.ColumnHeader viewLastAccessed;
+        private System.Windows.Forms.ColumnHeader viewIsPinned;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.ListView recordsPinList;
@@ -600,5 +610,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton tsbRetrievePins;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ColumnHeader recordUser;
+        private System.Windows.Forms.ColumnHeader viewUser;
+        private System.Windows.Forms.ColumnHeader recordPinned;
+        private System.Windows.Forms.ColumnHeader recordLastAccessed;
     }
 }

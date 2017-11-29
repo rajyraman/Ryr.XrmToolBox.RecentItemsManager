@@ -56,6 +56,7 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                         var rvi = recentlyViewedItems.Select(r =>
                             new RecentlyViewedItem
                             {
+                                User = x.GetAttributeValue<EntityReference>("ownerid").Name,
                                 Type = (RecentlyViewedType)int.Parse(r.Element("Type").Value),
                                 ObjectId = Guid.TryParse(r.Element("ObjectId")?.Value, out Guid o) ? 
                                            o : (Guid?)null,
@@ -160,9 +161,11 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                                 var itemToPin = new Entity("userentityuisettings")
                                 {
                                     ["ownerid"] = user.ToEntityReference(),
+                                    ["objecttypecode"] = groupedPinItem.Key,
                                     ["recentlyviewedxml"] = $@"<RecentlyViewedEntityData etc=""{groupedPinItem.Key}"">{newPinXml}</RecentlyViewedEntityData>"
                                 };
                                 detail.ServiceClient.OrganizationServiceProxy.Create(itemToPin);
+                                break;
                             }
                             else
                             {

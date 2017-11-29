@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Xrm.Sdk;
+using NuGet;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
 using ComboBox = System.Windows.Forms.ComboBox;
@@ -89,10 +90,11 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             }
             foreach (var r in result.OrderByDescending(x => x.LastAccessed))
             {
-                var row = new ListViewItem {Text = r.DisplayName, Tag = r};
+                var row = new ListViewItem {Text = r.User, Tag = r};
+                row.SubItems.Add(r.DisplayName);
                 row.SubItems.Add(r.Title);
-                row.SubItems.Add(r.LastAccessed.ToString());
                 row.SubItems.Add(r.PinStatus);
+                row.SubItems.Add(r.LastAccessed.ToString());
                 control.Items.Add(row);
             }
         }
@@ -178,10 +180,13 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             if (recordList.SelectedItems.Count == 0) return;
 
             var selectedItem = (RecentlyViewedItem)recordList.SelectedItems[0].Tag;
+            var baseUrl = ConnectionDetail.OriginalUrl.EndsWith("/")
+                ? ConnectionDetail.OriginalUrl
+                    : $"{ConnectionDetail.OriginalUrl}/";
             System.Diagnostics.Process.Start(
                 selectedItem.DisplayName == "Dashboard"
-                    ? $"{ConnectionDetail.WebApplicationUrl}workplace/home_dashboards.aspx?dashboardId={selectedItem.ObjectId}&{selectedItem.Action}"
-                    : $"{ConnectionDetail.WebApplicationUrl}main.aspx?etc={selectedItem.EntityTypeCode}&id={selectedItem.ObjectId}&newWindow=true&pagetype=entityrecord");
+                    ? $"{baseUrl}workplace/home_dashboards.aspx?dashboardId={selectedItem.ObjectId}&{selectedItem.Action}"
+                    : $"{baseUrl}main.aspx?etc={selectedItem.EntityTypeCode}&id={selectedItem.ObjectId}&newWindow=true&pagetype=entityrecord");
         }
 
         private void viewList_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -189,8 +194,11 @@ namespace Ryr.XrmToolBox.RecentItemsManager
             if (viewList.SelectedItems.Count == 0) return;
 
             var selectedItem = (RecentlyViewedItem)viewList.SelectedItems[0].Tag;
+            var baseUrl = ConnectionDetail.OriginalUrl.EndsWith("/")
+                ? ConnectionDetail.OriginalUrl
+                : $"{ConnectionDetail.OriginalUrl}/";
             System.Diagnostics.Process.Start(
-                $"{ConnectionDetail.WebApplicationUrl}_root/homepage.aspx?etc={selectedItem.EntityTypeCode}&pagemode=iframe&viewid={selectedItem.ObjectId}&{selectedItem.Action}");
+                $"{baseUrl}_root/homepage.aspx?etc={selectedItem.EntityTypeCode}&pagemode=iframe&viewid={selectedItem.ObjectId}&{selectedItem.Action}");
 
         }
 
@@ -217,10 +225,10 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 pinItem.PinStatus = clickedOption == "Pin" ? "Yes" : "No";
                 var listItem = new ListViewItem
                 {
-                    Text = record.Text,
+                    Text = record.SubItems[1].Text,
                     Tag = pinItem
                 };
-                listItem.SubItems.Add(record.SubItems[1]);
+                listItem.SubItems.Add(record.SubItems[2]);
                 listItem.SubItems.Add(pinItem.PinStatus);
                 targetList.Items.Add(listItem);
             }
@@ -242,8 +250,10 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                 Work = (bw, e) =>
                 {
                     var u = (List<Entity>)e.Argument;
-                    _recentItemsHelper.Pin(u, ListViewDelegates.GetItems(viewPinList));
-                    _recentItemsHelper.Pin(u, ListViewDelegates.GetItems(recordsPinList));
+                    _recentItemsHelper.RetrieveRecentItemsForUsers(u);
+                    var itemsToPin = ListViewDelegates.GetItems(viewPinList).ToList();
+                    itemsToPin.AddRange(ListViewDelegates.GetItems(recordsPinList));
+                    _recentItemsHelper.Pin(u, itemsToPin.ToArray());
                     ListViewDelegates.ClearColumns(recordsPinList);
                     ListViewDelegates.ClearColumns(viewPinList);
                     e.Result = "Completed";
