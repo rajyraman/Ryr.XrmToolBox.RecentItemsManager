@@ -28,12 +28,14 @@ namespace Ryr.XrmToolBox.RecentItemsManager
         {
             var result = new List<KeyValuePair<EntityReference, List<RecentlyViewedItem>>>();
             var currentUserId = detail.ServiceClient.OrganizationServiceProxy.CallerId;
+            _recentlyViewedRecords = new List<Entity>();
+
             foreach (var user in users)
             {
                 try
                 {
                     detail.ServiceClient.OrganizationServiceProxy.CallerId = user.Id;
-                    _recentlyViewedRecords = detail.ServiceClient.OrganizationServiceProxy.RetrieveMultiple(
+                    _recentlyViewedRecords.AddRange(detail.ServiceClient.OrganizationServiceProxy.RetrieveMultiple(
                         new FetchExpression($@"
                             <fetch distinct='false' no-lock='false' mapping='logical'>
                               <entity name='userentityuisettings'>
@@ -43,10 +45,11 @@ namespace Ryr.XrmToolBox.RecentItemsManager
                                   <condition attribute='ownerid' operator='eq' value='{user.Id}' />
                                 </filter>
                               </entity>
-                            </fetch>")).Entities.ToList();
+                            </fetch>")).Entities.ToList());
                     var userRecentlyViewedItems = _recentlyViewedRecords.Select(x =>
                     {
-                        if (string.IsNullOrEmpty(x.GetAttributeValue<string>("recentlyviewedxml")))
+                        if (string.IsNullOrEmpty(x.GetAttributeValue<string>("recentlyviewedxml")) 
+                            || x.GetAttributeValue<EntityReference>("ownerid").Id != user.Id)
                             return new KeyValuePair<EntityReference, List<RecentlyViewedItem>>(
                                 x.GetAttributeValue<EntityReference>("ownerid"),
                                 new List<RecentlyViewedItem>()
